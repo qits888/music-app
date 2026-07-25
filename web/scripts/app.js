@@ -8,6 +8,7 @@ import { Library } from './modules/library.js';
 import { Lyrics } from './modules/lyrics.js';
 import { Search } from './modules/search.js';
 import { Visualizer } from './modules/visualizer.js';
+import { Settings } from './modules/settings.js';
 import { $, $$, addClass, removeClass } from './utils/dom.js';
 import { loadVolume, saveVolume, loadPlayMode, savePlayMode } from './utils/storage.js';
 import { builtInTracks, categories } from './data/tracks.js';
@@ -36,6 +37,7 @@ const App = (() => {
         Lyrics.init();
         Search.init();
         Visualizer.init();
+        Settings.init();
     };
 
     const initUI = () => {

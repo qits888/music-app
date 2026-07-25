@@ -4,6 +4,7 @@ import { StateManager } from '../core/state-manager.js';
 import { EventBus } from '../core/event-bus.js';
 import { $, addClass, removeClass, toggleClass } from '../utils/dom.js';
 import { formatTime } from '../utils/format.js';
+import { getAudioUrl } from '../config.js';
 
 export const Player = (() => {
     let elements = {};
@@ -108,7 +109,11 @@ export const Player = (() => {
             StateManager.updateState('playlist.currentIndex', index);
             StateManager.updateState('player.currentTrack', track);
             
-            await AudioEngine.load(track.src);
+            // 使用配置的URL加载音频
+            const audioUrl = getAudioUrl(track.src);
+            console.log('加载音频:', audioUrl);
+            
+            await AudioEngine.load(audioUrl);
             await AudioEngine.play();
             
             StateManager.addToRecent(track.id);

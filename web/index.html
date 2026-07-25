@@ -40,6 +40,10 @@
                     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                     <span>搜索</span>
                 </li>
+                <li class="nav-item" data-view="settings">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>
+                    <span>设置</span>
+                </li>
             </ul>
         </nav>
 
@@ -151,6 +155,42 @@
                 </div>
             </section>
 
+            <!-- 设置视图 -->
+            <section class="view" id="settings-view" style="display:none;">
+                <div class="view-header">
+                    <h2>设置</h2>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">服务器配置</h3>
+                        <div class="settings-item">
+                            <div class="settings-item-info">
+                                <label for="use-remote-server">使用远程服务器</label>
+                                <p class="settings-item-desc">启用后将从远程服务器加载音频文件</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="use-remote-server">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-item-info">
+                                <label for="server-base-url">服务器基础URL</label>
+                                <p class="settings-item-desc">例如：https://your-domain.com/music 或 http://192.168.1.100:8080</p>
+                            </div>
+                            <input type="text" id="server-base-url" class="settings-input" placeholder="输入服务器地址">
+                        </div>
+                        <div class="settings-item">
+                            <button class="btn-primary" id="btn-save-server-config">保存配置</button>
+                            <button class="btn-secondary" id="btn-test-server">测试连接</button>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-status" id="server-status"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- 歌词面板（悬浮） -->
             <aside class="lyrics-panel" id="lyrics-panel">
                 <div class="lyrics-header">
@@ -203,6 +243,10 @@
             <button class="bottom-nav-item" data-view="search">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 <span>搜索</span>
+            </button>
+            <button class="bottom-nav-item" data-view="settings">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>
+                <span>设置</span>
             </button>
         </nav>
     </div>

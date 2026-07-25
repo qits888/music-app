@@ -99,3 +99,14 @@ export const saveRecent = (recent) => {
 export const loadRecent = () => {
     return storage.get('recent', []);
 };
+
+export const saveServerConfig = (config) => {
+    return storage.set('serverConfig', config);
+};
+
+export const loadServerConfig = () => {
+    return storage.get('serverConfig', {
+        useRemoteServer: false,
+        serverBaseUrl: ''
+    });
+};
