@@ -18,9 +18,23 @@ web/assets/audio/**/*.jpeg
 web/assets/audio/**/*.gif
 web/assets/audio/**/*.webp
 
+# 图片文件（包含audio@1目录）
+web/assets/audio@1/**/*.png
+web/assets/audio@1/**/*.jpg
+web/assets/audio@1/**/*.jpeg
+web/assets/audio@1/**/*.gif
+web/assets/audio@1/**/*.webp
+
 # 歌词文件（如果包含敏感信息）
 web/assets/audio/**/*.lrc
 web/assets/audio/**/*.txt
+
+# 歌词文件（包含audio@1目录）
+web/assets/audio@1/**/*.lrc
+web/assets/audio@1/**/*.txt
+
+# 排除整个audio@1目录
+web/assets/audio@1/
 
 # Android assets中的web资源（会在构建时自动复制）
 android/MusicApp/app/src/main/assets/web/
