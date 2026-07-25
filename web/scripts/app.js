@@ -120,11 +120,13 @@ const App = (() => {
         
         console.log(`✅ 已加载 ${builtInTracks.length} 首内置歌曲`);
         
-        // 自动加载第一首歌曲
+        // 默认加载第一首歌曲信息（不自动播放）
         if (builtInTracks.length > 0) {
             setTimeout(() => {
-                Player.playTrack(0);
-            }, 500);
+                const firstTrack = builtInTracks[0];
+                StateManager.updateState('playlist.currentIndex', 0);
+                StateManager.updateState('player.currentTrack', firstTrack);
+            }, 100);
         }
     };
 
