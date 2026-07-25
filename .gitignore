@@ -1,0 +1,34 @@
+# Android
+android/MusicApp/.gradle/
+android/MusicApp/local.properties
+android/MusicApp/.idea/
+android/MusicApp/build/
+android/MusicApp/app/build/
+android/MusicApp/captures/
+android/MusicApp/*.iml
+android/MusicApp/.DS_Store
+android/MusicApp/app/src/main/assets/web/
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp

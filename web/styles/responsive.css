@@ -1,0 +1,261 @@
+/* 响应式设计 - 移动优先 */
+
+/* 平板及以下（< 768px） */
+@media (max-width: 767px) {
+    /* 隐藏桌面侧边栏 */
+    .sidebar {
+        display: none;
+    }
+    
+    /* 主内容区调整 */
+    .main-content {
+        padding: var(--spacing-md);
+        padding-bottom: calc(var(--bottom-nav-height) + var(--mini-player-height) + var(--spacing-md));
+    }
+    
+    /* 显示底部导航 */
+    .bottom-nav {
+        display: flex;
+    }
+    
+    /* 显示迷你播放器 */
+    .mini-player {
+        display: flex;
+    }
+    
+    /* 播放器容器调整 */
+    .player-container {
+        gap: var(--spacing-lg);
+    }
+    
+    .player-cover {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    
+    .track-title {
+        font-size: 1.25rem;
+    }
+    
+    .track-artist {
+        font-size: 0.875rem;
+    }
+    
+    /* 控制按钮调整 */
+    .control-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .control-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .control-btn-play {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .control-btn-play svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* 视图头部调整 */
+    .view-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .view-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .library-actions {
+        width: 100%;
+    }
+    
+    .library-actions .btn-primary,
+    .library-actions .btn-secondary {
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* 音乐库网格调整 */
+    .library-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    /* 歌词面板调整 */
+    .lyrics-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    /* 播放列表项调整 */
+    .playlist-item {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .playlist-item-cover {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .playlist-item-title {
+        font-size: 0.875rem;
+    }
+    
+    .playlist-item-artist {
+        font-size: 0.75rem;
+    }
+}
+
+/* 小手机（< 375px） */
+@media (max-width: 374px) {
+    .player-cover {
+        max-width: 280px;
+    }
+    
+    .track-title {
+        font-size: 1.125rem;
+    }
+    
+    .library-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .control-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .control-btn-play {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+/* 平板（768px - 1023px） */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .main-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .library-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+/* 桌面（≥ 1024px） */
+@media (min-width: 1024px) {
+    .library-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    /* 鼠标悬停效果增强 */
+    .playlist-item:hover .playlist-item-title {
+        color: var(--color-primary);
+    }
+    
+    .library-card:hover .library-card-title {
+        color: var(--color-primary);
+    }
+}
+
+/* 大屏（≥ 1440px） */
+@media (min-width: 1440px) {
+    .sidebar {
+        width: 280px;
+    }
+    
+    .main-content {
+        padding: var(--spacing-2xl);
+    }
+    
+    .player-container {
+        max-width: 700px;
+    }
+    
+    .library-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    /* 增大可点击区域 */
+    .control-btn {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .nav-item {
+        min-height: 48px;
+    }
+    
+    .tab-btn {
+        min-height: 48px;
+    }
+    
+    /* 移除悬停效果 */
+    .progress-handle,
+    .volume-handle {
+        opacity: 1;
+    }
+}
+
+/* 横屏优化（移动设备） */
+@media (max-width: 767px) and (orientation: landscape) {
+    .player-cover {
+        max-width: 240px;
+    }
+    
+    .player-container {
+        gap: var(--spacing-md);
+    }
+    
+    .player-visualizer {
+        height: 60px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .sidebar,
+    .bottom-nav,
+    .mini-player,
+    .player-controls,
+    .lyrics-panel {
+        display: none;
+    }
+    
+    .main-content {
+        padding: 0;
+    }
+}
+
+/* 深色主题（已默认） */
+@media (prefers-color-scheme: dark) {
+    /* 已在变量中定义 */
+}
+
+/* 减少动画（无障碍） */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .cover-img {
+        animation: none !important;
+    }
+}

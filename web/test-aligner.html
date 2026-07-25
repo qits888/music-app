@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>增强版歌词对齐工具 - 测试页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .input-group label {
+            min-width: 100px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #555;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .output-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .output-content {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .info-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box h3 {
+            color: #0284c7;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .info-box p {
+            color: #075985;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .warning-box p {
+            color: #92400e;
+            font-size: 13px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .example-link {
+            color: #667eea;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+        
+        .example-link:hover {
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 增强版歌词自动对齐工具</h1>
+        <p class="subtitle">基于句长感知 + 音乐结构识别的智能对齐算法</p>
+        
+        <div class="info-box">
+            <h3>✨ 核心特性</h3>
+            <p>
+                • <strong>句长感知</strong>：根据每句歌词的字数动态分配时长，避免固定间隔<br>
+                • <strong>结构识别</strong>：自动检测前奏、间奏、尾奏等无歌词段落<br>
+                • <strong>智能插值</strong>：支持部分手动标注后自动填充其他时间戳<br>
+                • <strong>精度优化</strong>：最小/最大行间隔控制，时间戳归一化
+            </p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">1️⃣ 输入歌曲信息</div>
+            
+            <div class="input-group">
+                <label>歌曲名称：</label>
+                <input type="text" id="songTitle" placeholder="例如：今天为你点亮">
+            </div>
+            
+            <div class="input-group">
+                <label>歌手：</label>
+                <input type="text" id="artist" placeholder="例如：未知">
+            </div>
+            
+            <div class="input-group">
+                <label>音频时长(秒)：</label>
+                <input type="number" id="duration" placeholder="例如：237.80" step="0.01" min="0">
+                <span class="example-link" onclick="loadExample()">加载示例</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">2️⃣ 输入歌词文本</div>
+            <textarea id="lyricsInput" placeholder="粘贴纯文本歌词或已有的LRC格式歌词...
+
+支持格式：
+1. 纯文本（每行一句歌词）
+2. LRC格式（会自动重新对齐时间戳）
+
+示例：
+今晚的灯光慢慢亮
+笑声落在你身旁
+蛋糕香甜，蜡烛微光
+我们把祝福轻轻唱"></textarea>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">3️⃣ 对齐参数（可选）</div>
+            
+            <div class="input-group">
+                <label>最小行间隔(秒)：</label>
+                <input type="number" id="minLineGap" value="0.8" step="0.1" min="0.1">
+            </div>
+            
+            <div class="input-group">
+                <label>最大行间隔(秒)：</label>
+                <input type="number" id="maxLineGap" value="6.0" step="0.5" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label>前奏比例：</label>
+                <input type="number" id="introRatio" value="0.08" step="0.01" min="0" max="0.3">
+            </div>
+            
+            <div class="input-group">
+                <label>尾奏比例：</label>
+                <input type="number" id="outroRatio" value="0.06" step="0.01" min="0" max="0.2">
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn-primary" onclick="performAlign()">
+                <span>🚀</span> 开始对齐
+            </button>
+            <button class="btn-secondary" onclick="clearAll()">
+                <span>🗑️</span> 清空
+            </button>
+            <button class="btn-success" onclick="downloadLRC()" id="downloadBtn" style="display:none;">
+                <span>💾</span> 下载LRC文件
+            </button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>正在处理中...</p>
+        </div>
+        
+        <div class="section" id="outputSection" style="display:none;">
+            <div class="section-title">📋 对齐结果</div>
+            
+            <div class="stats" id="stats"></div>
+            
+            <div class="output-section">
+                <div class="output-content" id="output"></div>
+            </div>
+            
+            <div class="warning-box">
+                <p>⚠️ 自动对齐只能提供估算时间戳。建议配合实际音频播放进行微调，或使用专业工具（如 LrcMaker）进行精细调整。</p>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { enhancedAlign, prepareForManualTuning } from './scripts/tools/enhanced-lyrics-aligner.js';
+        
+        window.performAlign = function() {
+            const title = document.getElementById('songTitle').value.trim();
+            const artist = document.getElementById('artist').value.trim();
+            const duration = parseFloat(document.getElementById('duration').value);
+            const lyrics = document.getElementById('lyricsInput').value.trim();
+            
+            if (!lyrics) {
+                alert('请输入歌词文本！');
+                return;
+            }
+            
+            if (!duration || duration <= 0) {
+                alert('请输入有效的音频时长！');
+                return;
+            }
+            
+            const loading = document.getElementById('loading');
+            const outputSection = document.getElementById('outputSection');
+            
+            loading.classList.add('active');
+            outputSection.style.display = 'none';
+            
+            setTimeout(() => {
+                try {
+                    const options = {
+                        minLineGap: parseFloat(document.getElementById('minLineGap').value),
+                        maxLineGap: parseFloat(document.getElementById('maxLineGap').value),
+                        introRatio: parseFloat(document.getElementById('introRatio').value),
+                        outroRatio: parseFloat(document.getElementById('outroRatio').value),
+                        enableStructureDetection: true
+                    };
+                    
+                    // 添加元数据
+                    let fullLyrics = lyrics;
+                    if (!lyrics.includes('[ti:')) {
+                        let metadata = '';
+                        if (title) metadata += `[ti:${title}]\n`;
+                        if (artist) metadata += `[ar:${artist}]\n`;
+                        metadata += '[by:MusicApp Enhanced Aligner]\n\n';
+                        fullLyrics = metadata + lyrics;
+                    }
+                    
+                    const result = enhancedAlign(fullLyrics, duration, options);
+                    
+                    // 分析结果
+                    const lines = result.split('\n').filter(l => l.match(/^\[\d{2}:/));
+                    const lyricsLines = lines.filter(l => l.match(/\].+/));
+                    
+                    // 计算统计信息
+                    const firstTimestamp = lines[0].match(/\[(\d{2}):(\d{2})\.(\d{2})\]/);
+                    const lastTimestamp = lines[lines.length - 1].match(/\[(\d{2}):(\d{2})\.(\d{2})\]/);
+                    
+                    const firstTime = firstTimestamp ? 
+                        parseInt(firstTimestamp[1]) * 60 + parseInt(firstTimestamp[2]) + parseInt(firstTimestamp[3]) / 100 : 0;
+                    const lastTime = lastTimestamp ? 
+                        parseInt(lastTimestamp[1]) * 60 + parseInt(lastTimestamp[2]) + parseInt(lastTimestamp[3]) / 100 : 0;
+                    
+                    const singingDuration = lastTime - firstTime;
+                    const avgGap = lyricsLines.length > 1 ? singingDuration / (lyricsLines.length - 1) : 0;
+                    
+                    // 显示结果
+                    document.getElementById('output').textContent = result;
+                    
+                    document.getElementById('stats').innerHTML = `
+                        <div class="stat-card">
+                            <div class="stat-label">歌词行数</div>
+                            <div class="stat-value">${lyricsLines.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">前奏时长</div>
+                            <div class="stat-value">${firstTime.toFixed(2)}s</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">演唱时长</div>
+                            <div class="stat-value">${singingDuration.toFixed(2)}s</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">平均行间隔</div>
+                            <div class="stat-value">${avgGap.toFixed(2)}s</div>
+                        </div>
+                    `;
+                    
+                    outputSection.style.display = 'block';
+                    document.getElementById('downloadBtn').style.display = 'flex';
+                    
+                    // 保存结果供下载使用
+                    window.lastAlignedLRC = result;
+                    window.lastSongTitle = title || 'song';
+                    
+                } catch (error) {
+                    alert('对齐过程出错：' + error.message);
+                    console.error(error);
+                } finally {
+                    loading.classList.remove('active');
+                }
+            }, 100);
+        };
+        
+        window.downloadLRC = function() {
+            if (!window.lastAlignedLRC) {
+                alert('没有可下载的内容！');
+                return;
+            }
+            
+            const blob = new Blob([window.lastAlignedLRC], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${window.lastSongTitle || 'lyrics'}.lrc`;
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+        
+        window.clearAll = function() {
+            if (confirm('确定要清空所有内容吗？')) {
+                document.getElementById('songTitle').value = '';
+                document.getElementById('artist').value = '';
+                document.getElementById('duration').value = '';
+                document.getElementById('lyricsInput').value = '';
+                document.getElementById('outputSection').style.display = 'none';
+                document.getElementById('downloadBtn').style.display = 'none';
+            }
+        };
+        
+        window.loadExample = function() {
+            document.getElementById('songTitle').value = '今天为你点亮';
+            document.getElementById('artist').value = '未知';
+            document.getElementById('duration').value = '237.80';
+            document.getElementById('lyricsInput').value = `今晚的灯光慢慢亮
+笑声落在你身旁
+蛋糕香甜，蜡烛微光
+我们把祝福轻轻唱
+窗外的星星排成一行
+像是偷偷赶来为你鼓掌
+这一年你走过很多地方
+也把很多梦放进了行囊`;
+        };
+    </script>
+</body>
+</html>
