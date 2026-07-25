@@ -36,7 +36,6 @@ android/MusicApp/app/build/
 android/MusicApp/captures/
 android/MusicApp/*.iml
 android/MusicApp/.DS_Store
-android/MusicApp/gradle.properties
 
 # ==========================================
 # 开发工具
