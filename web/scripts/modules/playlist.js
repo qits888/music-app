@@ -4,6 +4,7 @@ import { EventBus } from '../core/event-bus.js';
 import { Player } from './player.js';
 import { $, $$, createElement, empty, delegate } from '../utils/dom.js';
 import { formatTime } from '../utils/format.js';
+import { getAudioUrl } from '../config.js';
 
 export const Playlist = (() => {
     let elements = {};

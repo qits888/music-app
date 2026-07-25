@@ -10,7 +10,8 @@ export const AudioEngine = (() => {
     
     const init = () => {
         audio = new Audio();
-        audio.crossOrigin = 'anonymous';
+        // 只在需要可视化时设置 crossOrigin，避免不必要的 CORS 限制
+        // audio.crossOrigin = 'anonymous';
         
         try {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -23,6 +24,9 @@ export const AudioEngine = (() => {
             source.connect(analyser);
             analyser.connect(gainNode);
             gainNode.connect(audioContext.destination);
+            
+            // 如果成功创建 AudioContext，才设置 crossOrigin
+            audio.crossOrigin = 'anonymous';
         } catch (error) {
             console.warn('Web Audio API 不可用，可视化功能将被禁用', error);
         }

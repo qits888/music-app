@@ -341,7 +341,8 @@ export const Player = (() => {
         
         if (elements.coverImage) {
             if (track.cover) {
-                elements.coverImage.src = track.cover;
+                // 使用配置的URL加载封面
+                elements.coverImage.src = getAudioUrl(track.cover);
                 elements.coverImage.style.display = 'block';
                 if (elements.coverPlaceholder) {
                     elements.coverPlaceholder.style.display = 'none';
@@ -363,7 +364,7 @@ export const Player = (() => {
         }
         
         if (elements.miniCover && track.cover) {
-            elements.miniCover.src = track.cover;
+            elements.miniCover.src = getAudioUrl(track.cover);
         }
     };
 
