@@ -65,8 +65,10 @@ export const Playlist = (() => {
             dataset: { index }
         });
         
+        const coverUrl = track.cover ? getAudioUrl(track.cover) : '';
+        
         item.innerHTML = `
-            ${track.cover ? `<img src="${track.cover}" alt="" class="playlist-item-cover">` : '<div class="playlist-item-cover"></div>'}
+            ${track.cover ? `<img src="${coverUrl}" alt="" class="playlist-item-cover">` : '<div class="playlist-item-cover"></div>'}
             <div class="playlist-item-info">
                 <div class="playlist-item-title">${track.title || '未知标题'}</div>
                 <div class="playlist-item-artist">${track.artist || '未知艺术家'}</div>

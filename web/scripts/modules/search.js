@@ -4,6 +4,7 @@ import { EventBus } from '../core/event-bus.js';
 import { Player } from './player.js';
 import { $, $$, createElement, empty, delegate } from '../utils/dom.js';
 import { debounce, highlightText } from '../utils/format.js';
+import { getAudioUrl } from '../config.js';
 
 export const Search = (() => {
     let elements = {};
@@ -103,9 +104,10 @@ export const Search = (() => {
         
         const titleHighlighted = highlightText(track.title || '未知标题', query);
         const artistHighlighted = highlightText(track.artist || '未知艺术家', query);
+        const coverUrl = track.cover ? getAudioUrl(track.cover) : '';
         
         item.innerHTML = `
-            ${track.cover ? `<img src="${track.cover}" alt="" class="playlist-item-cover">` : '<div class="playlist-item-cover"></div>'}
+            ${track.cover ? `<img src="${coverUrl}" alt="" class="playlist-item-cover">` : '<div class="playlist-item-cover"></div>'}
             <div class="playlist-item-info">
                 <div class="playlist-item-title">${titleHighlighted}</div>
                 <div class="playlist-item-artist">${artistHighlighted}</div>

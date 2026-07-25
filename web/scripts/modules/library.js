@@ -3,6 +3,7 @@ import { StateManager } from '../core/state-manager.js';
 import { EventBus } from '../core/event-bus.js';
 import { $, $$, createElement, empty, delegate } from '../utils/dom.js';
 import { categories } from '../data/tracks.js';
+import { getAudioUrl } from '../config.js';
 
 export const Library = (() => {
     let elements = {};
@@ -109,8 +110,10 @@ export const Library = (() => {
         const categoryBadge = track.category ? 
             `<span class="category-badge">${track.category}</span>` : '';
         
+        const coverUrl = track.cover ? getAudioUrl(track.cover) : '';
+        
         card.innerHTML = `
-            ${track.cover ? `<img src="${track.cover}" alt="" class="library-card-cover">` : '<div class="library-card-cover"></div>'}
+            ${track.cover ? `<img src="${coverUrl}" alt="" class="library-card-cover">` : '<div class="library-card-cover"></div>'}
             <div class="library-card-info">
                 <div class="library-card-title">${track.title || '未知标题'}</div>
                 <div class="library-card-artist">${track.artist || '未知艺术家'}</div>
