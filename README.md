@@ -1,208 +1,144 @@
-# 音乐播放器
+# 音乐播放器 Web App
 
-现代化的音乐播放器，支持网页版和安卓版。
+一个功能完整的网页音乐播放器，支持歌词显示、播放列表、搜索等功能。
 
-## 功能特性
+## ✨ 特性
 
-### 核心功能
-- ✅ 完整的音频播放控制（播放/暂停/上一首/下一首）
-- ✅ 进度条拖拽和音量控制
-- ✅ 播放模式切换（顺序/随机/单曲循环）
-- ✅ 播放列表管理
-- ✅ 音乐库分类浏览
-- ✅ **内置歌曲配置**（预配置音频资源）
-- ✅ LRC歌词解析和同步显示
-- ✅ 实时搜索功能
-- ✅ 音频频谱可视化
+- 🎵 音频播放控制（播放/暂停/上一曲/下一曲/进度条）
+- 📝 实时歌词显示与同步
+- 📚 音乐库管理和分类
+- 🔍 歌曲搜索功能
+- 📱 响应式设计，支持手机和电脑
+- 🎨 可视化音频效果
+- 📋 播放列表管理
 
-### UI特性
-- 🎨 现代简约设计风格
-- 📱 移动优先响应式布局
-- 🌙 深色主题
-- ✨ 磨砂玻璃效果
-- 🎭 流畅动画过渡
-- ♿ 无障碍访问支持
-
-## 技术栈
-
-- **前端**: 原生 HTML5 + CSS3 + ES6+ JavaScript
-- **架构**: 函数式编程 + 事件驱动
-- **音频**: Web Audio API
-- **存储**: LocalStorage
-- **安卓**: WebView
-
-## 项目结构
-
-```
-web/
-├── index.html              # 入口页面
-├── styles/                 # 样式文件
-│   ├── reset.css          # 样式重置
-│   ├── variables.css      # CSS变量
-│   ├── layout.css         # 布局系统
-│   ├── components.css     # 组件样式
-│   └── responsive.css     # 响应式
-├── scripts/               # JavaScript模块
-│   ├── core/              # 核心模块
-│   │   ├── audio-engine.js
-│   │   ├── state-manager.js
-│   │   └── event-bus.js
-│   ├── modules/           # 功能模块
-│   │   ├── player.js
-│   │   ├── playlist.js
-│   │   ├── library.js
-│   │   ├── lyrics.js
-│   │   ├── search.js
-│   │   └── visualizer.js
-│   ├── utils/             # 工具函数
-│   │   ├── dom.js
-│   │   ├── format.js
-│   │   └── storage.js
-│   └── app.js             # 应用入口
-└── assets/                # 资源文件
-    ├── icons/
-    └── demo-audio/
-```
-
-## 快速开始
+## 🚀 快速开始
 
 ### 网页版
 
-⚠️ **重要**：由于使用ES6模块，必须通过HTTP服务器访问，不能直接双击HTML文件。
+1. 克隆仓库
+```bash
+git clone https://github.com/你的用户名/仓库名.git
+```
 
-使用本地服务器：
+2. 添加音频文件
+将你的音乐文件放入 `web/assets/audio/` 目录，按以下结构组织：
+
+```
+web/assets/audio/
+├── 分类名1/
+│   ├── 歌曲名1/
+│   │   ├── 歌曲名1.mp3 (或 .wav)
+│   │   ├── 歌曲名1.lrc (歌词文件)
+│   │   ├── 歌曲名1.png (封面图片)
+│   │   └── 歌曲名1.txt (歌词文本)
+│   └── 歌曲名2/
+│       └── ...
+└── 分类名2/
+    └── ...
+```
+
+3. 打开网页
+直接用浏览器打开 `web/index.html` 即可使用。
+
+### Android版
+
+本项目支持打包为Android应用，使用GitHub Actions自动构建。
+
+#### 自动构建步骤
+
+1. 确保音频文件已添加到 `web/assets/audio/` 目录
+2. 推送代码到GitHub
+3. GitHub Actions会自动构建APK
+4. 在Actions页面下载构建好的APK
+
+详细步骤请参考：[新手GitHub操作指南.md](新手GitHub操作指南.md)
+
+#### 本地构建（可选）
+
+如果安装了Android Studio或Android SDK：
 
 ```bash
-# 使用Python
-cd web
-python -m http.server 8000
-
-# 使用Node.js
-npx serve web
-
-# 使用PHP
-cd web
-php -S localhost:8000
+cd android/MusicApp
+./gradlew assembleDebug  # Linux/Mac
+gradlew.bat assembleDebug  # Windows
 ```
 
-然后访问 `http://localhost:8000`
+APK位置：`android/MusicApp/app/build/outputs/apk/debug/app-debug.apk`
 
-### 安卓版
-
-1. 使用 Android Studio 打开 `android/MusicApp` 目录
-2. 构建并运行项目
-3. 或直接安装打包好的 APK
-
-## 使用说明
-
-### 添加音乐
-
-**内置歌曲配置方式**（v2.0）
-
-1. **准备音频文件**
-   - 将音频文件（MP3、WAV等）放到 `web/assets/audio/` 目录
-   - 将封面图片（JPG、PNG）放到同一目录
-
-2. **配置歌曲信息**
-   - 编辑 `web/scripts/data/tracks.js` 文件
-   - 按照格式添加歌曲配置：
-   ```javascript
-   {
-       id: 'my-song-1',
-       title: '歌曲名',
-       artist: '艺术家',
-       src: 'assets/audio/song.mp3',
-       cover: 'assets/audio/cover.jpg',
-       lyrics: `[00:00.00]歌词...`
-   }
-   ```
-
-3. **刷新浏览器**
-   - 按 `Ctrl+Shift+R` 强制刷新
-
-详细说明请查看 [USAGE.md](web/USAGE.md)
-
-### 播放控制
-
-- 点击封面或卡片播放音乐
-- 使用底部控制栏进行播放控制
-- 拖动进度条跳转播放位置
-- 点击模式按钮切换播放模式
-
-### 查看歌词
-
-- 歌词会自动加载（如果音轨包含歌词）
-- 歌词随播放进度自动滚动高亮
-- 点击歌词行可以跳转到对应位置
-
-### 搜索音乐
-
-1. 点击"搜索"标签
-2. 输入歌曲名、艺术家或专辑名
-3. 点击搜索结果即可播放
-
-## 架构设计
-
-### 核心模块
-
-**AudioEngine（音频引擎）**
-- 封装 HTML5 Audio API
-- 提供播放控制接口
-- 集成 Web Audio API 用于频谱分析
-
-**StateManager（状态管理器）**
-- 集中管理应用状态
-- 发布状态变更事件
-- 提供状态读写接口
-
-**EventBus（事件总线）**
-- 模块间解耦通信
-- 支持订阅/发布模式
-- 事件错误隔离
-
-### 数据流
+## 📁 项目结构
 
 ```
-用户交互 → EventBus → StateManager → AudioEngine
-              ↓             ↓
-          UI更新    ←   状态变更通知
+.
+├── web/                      # 网页版源码
+│   ├── index.html           # 主页面
+│   ├── styles/              # 样式文件
+│   ├── scripts/             # JavaScript代码
+│   │   ├── core/           # 核心模块
+│   │   ├── modules/        # 功能模块
+│   │   └── utils/          # 工具函数
+│   └── assets/
+│       └── audio/          # 音频资源（.gitignore已排除）
+├── android/                 # Android项目
+│   └── MusicApp/           # Android应用源码
+├── .github/
+│   └── workflows/          # GitHub Actions配置
+└── README.md               # 项目说明
 ```
 
-### 状态机
+## 📝 注意事项
 
-播放器状态：idle → loading → ready → playing ⇄ paused
+### 音频文件说明
 
-## 浏览器兼容性
+⚠️ **音频文件不包含在仓库中**
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- 移动端浏览器（iOS Safari 14+, Chrome Mobile 90+）
+由于版权和仓库大小限制，音频文件（.mp3, .wav等）、封面图片和歌词文件不会上传到GitHub。
 
-## 性能优化
+使用前请：
+1. 克隆仓库后
+2. 手动将你的音乐文件添加到 `web/assets/audio/` 目录
+3. 按照上述目录结构组织文件
 
-- 虚拟滚动处理长列表
-- requestAnimationFrame 优化动画
-- 防抖/节流处理用户输入
-- 图片懒加载
-- LocalStorage 数据持久化
+### 歌词文件格式
 
-## 未来计划
+支持 `.lrc` 格式的歌词文件，格式示例：
 
-- [ ] 管理界面：添加/编辑/删除歌曲
-- [ ] 云端同步（需后端支持）
-- [ ] 用户系统和个性化推荐
-- [ ] 播放历史和统计
-- [ ] 均衡器
-- [ ] 音效增强
-- [ ] 导入/导出播放列表
-- [ ] 深色/浅色主题切换
-- [ ] 多语言支持
+```
+[00:12.50]第一句歌词
+[00:18.20]第二句歌词
+```
 
-## 许可证
+## 🛠️ 技术栈
 
-MIT License
+- **前端**：原生 HTML5 + CSS3 + JavaScript (ES6+)
+- **音频处理**：Web Audio API
+- **Android**：WebView混合应用
+- **CI/CD**：GitHub Actions
 
-## 贡献
+## 📱 系统要求
 
-欢迎提交 Issue 和 Pull Request！
+- **网页版**：现代浏览器（Chrome, Firefox, Safari, Edge）
+- **Android版**：Android 5.0 (API 21) 或更高版本
+
+## 📚 相关文档
+
+- [新手GitHub操作指南](新手GitHub操作指南.md) - 从零开始使用GitHub
+- [快速操作卡片](快速操作卡片.md) - 常用命令速查
+- [Android构建指南](android/ANDROID_BUILD.md) - Android详细构建说明
+- [GitHub构建指南](GITHUB_BUILD_GUIDE.md) - 使用GitHub Actions构建
+
+## 🤝 贡献
+
+欢迎提交Issue和Pull Request！
+
+## 📄 许可证
+
+本项目仅供学习交流使用。
+
+## ⚖️ 版权声明
+
+请确保你添加的音频文件拥有合法的使用权限，不要侵犯版权。
+
+---
+
+**提示**：首次使用请阅读 [新手GitHub操作指南.md](新手GitHub操作指南.md)
