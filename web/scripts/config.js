@@ -3,32 +3,41 @@
 
 import { loadServerConfig, saveServerConfig } from './utils/storage.js';
 
-// 从本地存储加载配置
-let serverConfig = loadServerConfig();
-
-// 获取当前配置
+// 获取当前配置（每次都从存储读取最新值）
 export function getServerConfig() {
-    return serverConfig;
+    return loadServerConfig();
 }
 
 // 更新配置
 export function updateServerConfig(newConfig) {
-    serverConfig = { ...serverConfig, ...newConfig };
-    saveServerConfig(serverConfig);
-    return serverConfig;
+    const currentConfig = loadServerConfig();
+    const updatedConfig = { ...currentConfig, ...newConfig };
+    saveServerConfig(updatedConfig);
+    console.log('配置已更新:', updatedConfig);
+    return updatedConfig;
 }
 
 // 音频文件路径构建函数
 export function getAudioUrl(relativePath) {
     const config = getServerConfig();
+    
+    console.log('构建音频URL:', {
+        relativePath,
+        useRemoteServer: config.useRemoteServer,
+        serverBaseUrl: config.serverBaseUrl
+    });
+    
     if (config.useRemoteServer && config.serverBaseUrl) {
         // 使用远程服务器
         const baseUrl = config.serverBaseUrl.endsWith('/') 
             ? config.serverBaseUrl.slice(0, -1) 
             : config.serverBaseUrl;
-        return `${baseUrl}/${relativePath}`;
+        const fullUrl = `${baseUrl}/${relativePath}`;
+        console.log('使用远程URL:', fullUrl);
+        return fullUrl;
     } else {
         // 使用本地文件
+        console.log('使用本地路径:', relativePath);
         return relativePath;
     }
 }

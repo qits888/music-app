@@ -56,9 +56,10 @@ export const Settings = (() => {
         };
 
         updateServerConfig(newConfig);
-        showStatus('配置已保存', 'success');
+        showStatus('配置已保存！刷新页面后生效', 'success');
 
         console.log('服务器配置已更新:', newConfig);
+        console.log('当前localStorage:', localStorage.getItem('music-app-serverConfig'));
     };
 
     const testConnection = async () => {
